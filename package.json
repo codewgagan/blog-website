@@ -1,0 +1,27 @@
+{
+  "name": "blog-website",
+  "version": "1.0.0",
+  "description": "This is a **full-stack blog/todo project** built with React (frontend) and Node.js + Express + MongoDB (backend).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client" : "npm start --prefix client",
+    "server" : "node server/index.js",
+    "dev" : "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codewgagan/blog-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/codewgagan/blog-website/issues"
+  },
+  "homepage": "https://github.com/codewgagan/blog-website#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
