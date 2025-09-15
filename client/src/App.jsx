@@ -10,8 +10,12 @@ import "./App.css";
 
 function App() {
   return (
+    
     <Router>
       <Navbar />
+      <h1 className="text-3xl font-bold text-blue-500 underline">
+      Tailwind is working! 🎉
+    </h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<BlogDetails />} />

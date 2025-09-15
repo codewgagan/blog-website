@@ -10,6 +10,7 @@ function Navbar() {
         Blogs
       </Link>
       <Link to="/create">Create Blog</Link>
+      <Link to="/" style={{}} >akdb</Link>
     </nav>
   );
 }
