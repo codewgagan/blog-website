@@ -19,8 +19,8 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { title, content, author } = req.body;
-    const blog = new Blog({ title, content, author });
-    const savedBlog = await blog.save();
+    const newBlog = new Blog({ title, content, author });
+    const savedBlog = await newBlog.save();
     res.status(201).json(savedBlog);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 // @route   GET /api/blogs/:id
 router.get("/:id", async (req, res) => {
   try {
-    const blog = await Blog.findById();
+    const blog = await Blog.findById(req.params.id);
     if (!blog) return res.status(404).json({ message: "Blog not found" });
     res.json(blog);
   } catch (error) {
