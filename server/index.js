@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import Test from "./models/Test.js";
 import blogRoutes from "./routes/blogRoutes.js"
+import authRoutes from "./routes/authRoutes.js"
 
 // import { config } from "yargs";
 // Initialize environment variables
@@ -20,6 +21,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 
 // Routes
 app.use("/api/blogs",blogRoutes);

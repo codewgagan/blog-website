@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import { timestamp } from "rxjs";
 
-const userScheme = new mongoose.userScheme(
+const userSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
       unique: true,
@@ -22,6 +22,6 @@ const userScheme = new mongoose.userScheme(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userScheme);
+const User = mongoose.model("User", userSchema);
 
 export default User;

@@ -1,5 +1,6 @@
 import express from "express";
 import Blog from "../models/Blog.js";
+import authMiddleware from "../middleware/authMiddleware.js"
 
 // create router
 const router = express.Router();
@@ -11,12 +12,12 @@ router.get("/", async (req, res) => {
     const blogs = await Blog.find();
     res.json(blogs);
   } catch (error) {
-    res.status(500).json({ message: message.error });
+    res.status(500).json({ message: error.message });
   }
 });
 // @desc    Create new blog
 // @route   POST /api/blogs
-router.post("/", async (req, res) => {
+router.post("/",authMiddleware, async (req, res) => {
   try {
     const { title, content, author } = req.body;
     const newBlog = new Blog({ title, content, author });
@@ -39,12 +40,12 @@ router.get("/:id", async (req, res) => {
 });
 // @desc    Update blog
 // @route   PUT /api/blogs/:id
-router.put("/:id", async (req, res) => {
+router.put("/:id",authMiddleware, async (req, res) => {
   try {
-    const { title, content, autor } = req.body;
+    const { title, content, author } = req.body;
     const updatedBlog = await Blog.findByIdAndUpdate(
       req.params.id,
-      { title, content, autor },
+      { title, content, author },
       { new: true }
     );
 
@@ -57,11 +58,11 @@ router.put("/:id", async (req, res) => {
 });
 // @desc    Delete blog
 // @route   DELETE /api/blogs/:id
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",authMiddleware, async (req, res) => {
   try {
     const deleteBlog = await Blog.findByIdAndDelete(req.params.id);
     if (!deleteBlog) return res.status(404).json({ message: "Blog not found" });
-    res.json("Blog deleted Successfully");
+    res.json({ message: "Blog deleted Successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
