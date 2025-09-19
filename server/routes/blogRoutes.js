@@ -1,6 +1,6 @@
 import express from "express";
 import Blog from "../models/Blog.js";
-import authMiddleware from "../middleware/authMiddleware.js"
+import authMiddleware from "../middleware/authMiddleware.js";
 
 // create router
 const router = express.Router();
@@ -17,10 +17,10 @@ router.get("/", async (req, res) => {
 });
 // @desc    Create new blog
 // @route   POST /api/blogs
-router.post("/",authMiddleware, async (req, res) => {
+router.post("/", authMiddleware, async (req, res) => {
   try {
     const { title, content, author } = req.body;
-    const newBlog = new Blog({ title, content, author });
+    const newBlog = new Blog({ title, content, author: req.user.id }); // logged-in user's ID
     const savedBlog = await newBlog.save();
     res.status(201).json(savedBlog);
   } catch (error) {
@@ -33,6 +33,7 @@ router.get("/:id", async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
     if (!blog) return res.status(404).json({ message: "Blog not found" });
+
     res.json(blog);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -40,17 +41,22 @@ router.get("/:id", async (req, res) => {
 });
 // @desc    Update blog
 // @route   PUT /api/blogs/:id
-router.put("/:id",authMiddleware, async (req, res) => {
+router.put("/:id", authMiddleware, async (req, res) => {
   try {
-    const { title, content, author } = req.body;
-    const updatedBlog = await Blog.findByIdAndUpdate(
-      req.params.id,
-      { title, content, author },
-      { new: true }
+    // const { title, content, author } = req.body;
+    const blog = await Blog.findById(
+      req.params.id
+      // { title, content, author },
+      // { new: true }
     );
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+    if (blog.author.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+    const updatedBlog = await blog.save();
 
-    if (!updatedBlog)
-      return res.status(404).json({ message: "Blog not found" });
+    blog.title = req.body.title || blog.title;
+    blog.content = req.body.content || blog.content;
     res.json(updatedBlog);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -58,10 +64,15 @@ router.put("/:id",authMiddleware, async (req, res) => {
 });
 // @desc    Delete blog
 // @route   DELETE /api/blogs/:id
-router.delete("/:id",authMiddleware, async (req, res) => {
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    const deleteBlog = await Blog.findByIdAndDelete(req.params.id);
-    if (!deleteBlog) return res.status(404).json({ message: "Blog not found" });
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    if (blog.author.toString() !== req.user.id) {
+      return res.status(403).json({ error: "Not authorized" });
+    }
+    await blog.deleteOne();
     res.json({ message: "Blog deleted Successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
