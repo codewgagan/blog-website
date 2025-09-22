@@ -7,6 +7,8 @@ import BlogList from "./pages/BlogList";
 import CreateBlog from "./pages/CreateBlog";
 import EditBlog from "./pages/EditBlog";
 import About from "./pages/About";
+import Signup from "./pages/Signup";
+// import Login from "./pages/Login";
 import "./App.css";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path="/create" element={<CreateBlog />} />
         <Route path="/edit" element={<EditBlog />} />
         <Route path="/about" element={<About />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+        {/* <Route path="/login" element={<Login />}></Route> */}
       </Routes>
     </Router>
   );
