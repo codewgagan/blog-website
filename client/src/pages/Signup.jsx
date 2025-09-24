@@ -27,22 +27,22 @@ function signUp() {
         <input
           type="text"
           placeholder="Name"
-          className="border p-2 mb-2 w-full"
+          className="border p-2 mb-2 w-full rounded-md"
           onChange={handleChange}
         />
         <input
           type="text"
           placeholder="Email"
-          className="border p-2 mb-2 w-full"
+          className="border p-2 mb-2 w-full rounded-md"
           onChange={handleChange}
         />
         <input
           type="text"
           placeholder="Password"
-          className="border p-2 mb-2 w-full"
+          className="border p-2 mb-2 w-full rounded-md"
           onChange={handleChange}
         />
-        <button>Signup</button>
+        <button className="bg-blue-600 rounded px-4 py-2 text-white" type="submit">Signup</button>
       </form>
     </div>
   );
