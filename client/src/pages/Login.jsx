@@ -5,10 +5,11 @@ function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: [e.target.value] });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       // api response for login
       const res = await API.post("/auth/login", form);
@@ -29,6 +30,7 @@ function Login() {
         <h2 className="text-xl mb-4">Login</h2>
         <input
           type="email"
+          name="email"
           placeholder="email"
           className="border p-2 mb-2 w-full"
           onChange={handleChange}
@@ -36,9 +38,10 @@ function Login() {
 
         <input
           type="password"
-          placeholder="passwprd"
+          name="password"
+          placeholder="password"
           className="border p-2 mb-2 w-full"
-          onChange={handleSubmit}
+          onChange={handleChange}
         />
         <button className="bg-green-500 text-white px-4 py-2 rounded" type="submit">Login</button>
       </form>

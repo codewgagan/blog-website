@@ -3,7 +3,7 @@ import API from "../api.js";
 
 // Signup function
 function signUp() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
 
   // handlechanage
   const handleChange = (e) => {
@@ -11,7 +11,7 @@ function signUp() {
   };
   // handlesubmit
   const handleSubmit = async (e) => {
-    e.prevntDefault();
+    e.preventDefault();
     try {
       await API.post("/auth/signup", form);
       alert("Signup successful chal login kar.");
@@ -26,18 +26,21 @@ function signUp() {
         <h2 className="text-xl mb-4">Signup Page</h2>
         <input
           type="text"
+          name="username"
           placeholder="Name"
           className="border p-2 mb-2 w-full rounded-md"
           onChange={handleChange}
         />
         <input
           type="text"
+          name="email"
           placeholder="Email"
           className="border p-2 mb-2 w-full rounded-md"
           onChange={handleChange}
         />
         <input
           type="text"
+          name="password"
           placeholder="Password"
           className="border p-2 mb-2 w-full rounded-md"
           onChange={handleChange}
