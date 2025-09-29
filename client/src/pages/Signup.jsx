@@ -14,6 +14,8 @@ function signUp() {
     e.preventDefault();
     try {
       await API.post("/auth/signup", form);
+       // ✅ log the full response
+      console.log("Signup Response:", res.data);
       alert("Signup successful chal login kar.");
     } catch (err) {
       alert(err.response?.data?.error || "kuch galat ho gaya hai bhai");

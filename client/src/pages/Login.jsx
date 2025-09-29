@@ -14,6 +14,10 @@ function Login() {
       // api response for login
       const res = await API.post("/auth/login", form);
       // storing data in local storage using token
+
+       // ✅ log the full response
+      console.log("Login Response:", res.data);
+      
       localStorage.setItem("token", res.data.token);
       // alert msg
       alert("Login Succesful");
