@@ -13,7 +13,7 @@ function signUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.post("/auth/signup", form);
+      await API.post("http://localhost:5000/api/auth/signup", form);
        // ✅ log the full response
       console.log("Signup Response:", res.data);
       alert("Signup successful chal login kar.");
