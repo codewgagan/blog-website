@@ -2,7 +2,7 @@ import { useState } from "react";
 import API from "../api.js";
 
 // Signup function
-function signUp() {
+function Signup() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
 
   // handlechanage
@@ -13,7 +13,7 @@ function signUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.post("http://localhost:5000/api/auth/signup", form);
+      const res = await API.post("http://localhost:5000/api/auth/signup", form);
        // ✅ log the full response
       console.log("Signup Response:", res.data);
       alert("Signup successful chal login kar.");
@@ -53,4 +53,4 @@ function signUp() {
   );
 }
 
-export default signUp;
+export default Signup;
