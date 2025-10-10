@@ -4,9 +4,9 @@ import API from "../api.js";
 export const getBlogs = () => API.get("/blogs");
 
 // Create new blog (protected)
-export const createBlog = () => API.post("/blogs", blogData);
+export const createBlog =async (blogData) => API.post("/blogs", blogData);
 // Update blog (protected)
-export const updateBlog = () => API.put(`/blogs/${id}`, blogData);
+export const updateBlog = (blogData) => API.put(`/blogs/${id}`, blogData);
 // Delete blog (protected)
 
-export const deleteBlog = () => API.delete(`/blogs/${id}`); 
+export const deleteBlog = (id) => API.delete(`/blogs/${id}`); 
