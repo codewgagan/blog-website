@@ -1,7 +1,8 @@
 import axios from "axios";
+import { useEffect } from "react";
 
 const API = axios.create({
-    baseURL: "http:localhost:5000.api/blogs"
+    baseURL: "http://localhost:5000"
 });
 
 // Attach token automatically if exists
