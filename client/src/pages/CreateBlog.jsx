@@ -12,10 +12,10 @@ function CreateBlog() {
   // handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // prevents page reload on form submit
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
     try {
       // API call to create new blog post
-      const response = await createBlog(form,token);
+      const response = await createBlog(form);
       console.log("Blog created successfully:", response.data);
 
       // clear form after successful creation
