@@ -25,10 +25,10 @@ function CreateBlog() {
     }
   };
   return (
-    <div>
-      <h2>Create Blog</h2>
+    <div className="max-w-md mx-auto mt-8">
+      <h2 className="text-2xl font-bold mb-4 text-center">Create Blog</h2>
       {/* form for creating a new blog */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* title input */}
         <input
           type="text"
@@ -36,6 +36,7 @@ function CreateBlog() {
           value={form.title}
           onChange={handleChange}
           placeholder="Enter title"
+          className="w-full p-2 border rounded"
           required
         />
 
@@ -45,12 +46,13 @@ function CreateBlog() {
         value={form.content}
         onChange={handleChange}
         placeholder="Enter contnet"
+        className="w-full p-2 border rounded"
         required
         
         />
 
         {/* Submit button */}
-        <button type="submit">Create blog</button>
+        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Create blog</button>
       </form>
     </div>
   );
